@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- <div class="container-grid">-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-9">-->
+
+<!--                <div style="background-image:url('{% static 'images/store.jpeg' %}');background-size:cover;height:620px;width:140%;resize:vertical">-->
+<!--							</div>-->
+<!--                </div></div></div>-->
+
+<h4 class="text-center" style="background-color:transparent"> Shopping Cart</h4>
+
+
+<div style="background-color:#ABBAEA">
+ <div class="container">
+<div class="row">
+
+  <div class="col-md-8">
+    <table class="table table-bordered border border-3 border-primary text-yellow text-center" style="background-color:grey";>
+        <tr>
+      <th  colspan="5">Cart Items</th>
+        </tr>
+        {% for i in cart %}
+        <tr>
+          <td><img src="{{i.product.image.url}}" height="100px" width="100px"></td>
+          <td>Name:{{i.product.name}}</td>
+          <td>Quantity:{{i.quantity}}<br>Unit price:{{i.product.price}}</td>
+          <td>Subtotal:{{i.subtotal}}</td>
+          <td>
+              {% if i.product.stock > 0 %}
+              <a href="{% url 'cart:addtocart' i.product.id %} "><i class="fa-solid fa-square-plus text-success fs-4"></i></a>
+              <a href="{% url 'cart:cartremove' i.product.id %}"><i class="fa-solid fa-square-minus text-success fs-4"></i></a>
+              <a href="{% url 'cart:cartdelete' i.product.id %}"><i class="fa-solid fa-trash-can text-success fs-4"></i></a>
+              {% else %}
+              <a href="{% url 'cart:cartremove' i.product.id %}"><i class="fa-solid fa-square-minus text-success fs-4"></i></a>
+              <a href="{% url 'cart:cartdelete' i.product.id %}"><i class="fa-solid fa-trash-can text-success fs-4"></i></a>
+              {% endif %}
+          </td>
+      </tr>
+         {% endfor %}
+</table>
+  </div>
+  <div class="col-md-4">
+     <table class="table table-bordered border border-3 border-primary text-yellow text-center" style="background-color:grey";>
+
+    <tr>
+      <th  rowspan="1">Check out</th>
+      </tr>
+         <tr><td>Total:{{total}}</td></tr>
+
+     </table>
+
+
+
+
+    <div class="d-flex  justify-content-between">
+        <a href="{% url 'cart:orderform' %}" class="btn btn-success">OrderNow</a>
+        <a href="" class="btn btn-success">Continue Shopping</a>
+
+
+
+</div>
+<br>
+  </div>
+</div>
+
+ </div></div>
+
+{% endblock %}

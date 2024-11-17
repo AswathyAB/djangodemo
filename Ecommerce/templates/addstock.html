@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h4>ADD STOCK </h4>
+ <form method="POST" enctype="multipart/form-data" style="background-color:#2E5A88">
+
+    {% csrf_token %}
+  <div class="container">
+  <div class="mb-3 row">
+      <h5> Stock Details </h5><br>
+    <input type="number" class="form-control"  value="{{pro.stock}}" placeholder="no of stock" name="n"  >
+    </div>
+      <div class="mb-3 row">
+      <input type="submit" class="form-control" id="submit">
+    </div></div><br><br>
+</form>
+
+{% endblock %}

@@ -1,0 +1,169 @@
+
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+
+<!-- Bootstrap CSS -->
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<link href="{% static 'css/tiny-slider.css' %}" rel="stylesheet">
+		<link href="{% static 'css/style.css' %}" rel="stylesheet">
+		<title> </title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+ </head>
+
+	<body>
+	<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-grey">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">EzShop</a>
+			   <div class="collapse navbar-collapse">
+
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li class="nav-item active">
+							<a class="nav-link" href="{% url 'shop:categories' %}">Home</a>
+						</li>
+						<form class="d-flex" method="POST" action="{% url 'search:search' %}">
+								{% csrf_token %}
+        <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+							</form>
+						<li class="nav-item dropdown ">
+							<a class="nav-link dropdown-toggle" href="#" role="button" id="navbarDropodown" data-bs-toggle="dropdown" aria-expanded="false" >
+							 All Categories</a>
+
+
+						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+							{% for i in links %}
+							<li><a class="dropdown-item" href="{% url 'shop:products' i.id %}">{{i.name}}</a></li>
+							{% endfor %}
+						</ul>  </ul>
+						</li>
+
+						<ul class="navbar-nav">
+                            {% if user.is_authenticated %}
+                               {% if user.is_superuser == False %}
+                                   <li class="nav-item">
+                                       <a class="nav-link" href="{% url 'cart:cartview' %}">
+                                         <img src="{% static 'images/cart.svg' %}"><sup class="mx-2 fs-5">{{c}}</sup>
+                                       </a>
+								   </li>
+							       <li class="nav-item">
+                                          <a class="nav-link" href="{% url 'cart:orderview' %}">Your Orders</a>
+                                    </li>
+							{% else %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'shop:addcategory' %}">Add Categories</a>
+                                            </li>
+                                             <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'shop:addproducts' %}">Add Products</a>
+                                         </li>
+							{% endif %}
+                                     <li class="nav-item">
+                                      <a class="nav-link" href="{% url 'shop:userlogout' %}">Logout</a>
+                                        </li>
+							{% else %}
+                                             <li class="nav-item">
+                                          <a class="nav-link"  href="{% url 'shop:register' %}">Register</a>
+                                               </li>
+                                                <li class="nav-item">
+                                          <a class="nav-link" href="{% url 'shop:userlogin' %}">Login</a>
+                                           </li>
+                            {% endif %}
+                                            </ul>
+
+
+
+
+
+				</div>
+
+			</div>
+
+
+
+
+
+		</nav>
+{% block content %}
+
+<h4> CATEGORIES</h4><br>
+{% endblock %}
+
+	<footer class="footer-section">
+			<div class="container-fluid relative bg-secondary">
+				<div class="row">
+					<div class="col-lg-8 bg-secondary">
+						<div class="subscription-form">
+							<h3 class="d-flex align-items-center"><span class="me-1"><img src="{% static 'images/envelope-outline.svg' %}" alt="Image" class="img-fluid"></span><span>Subscribe to Newsletter</span></h3>
+							<form action="#" class="row g-3">
+								<div class="col-auto">
+									<input type="text" class="form-control" placeholder="Enter your name">
+								</div>
+								<div class="col-auto">
+									<input type="email" class="form-control" placeholder="Enter your email">
+								</div>
+								<div class="col-auto">
+									<button class="btn btn-primary">
+										<span class="fa fa-paper-plane"></span>
+									</button>
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="row mb-2">
+					<div class="col-lg-4">
+						<div class="mb-4 footer-logo-wrap"><a href="" >EzShop<span>.</span></a></div>
+						<ul class="list-unstyled custom-social">
+							<li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+							<li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+						</ul></div>
+
+
+					<div class="row">
+						<div class="col-sm-4">
+							<button class="btn btn-outline-light rounded-pill">Services</button>
+							<button class="btn btn-outline-light rounded-pill">Blog</button>
+							<button class="btn btn-outline-light rounded-pill">Coontact Us</button>
+
+
+						</div>
+					</div>
+
+				</div>
+
+				<div class="border-top copyright">
+					<div class="row pt-4">
+						<div class="col-lg-6">
+							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> Distributed By <a hreff="https://themewagon.com">ThemeWagon</a>  <!-- License information: https://untree.co/license/ -->
+            </p>
+						</div>
+
+						<div class="col-lg-6 text-center text-lg-end">
+							<ul class="list-unstyled d-inline-flex ms-auto">
+								<li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</footer>
+	</body></html>

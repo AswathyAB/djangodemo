@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-grid">
+        <div class="row">
+            <div class="col-lg-9">
+
+                <div style="background-image:url('{% static 'images/store.jpeg' %}');background-size:cover;height:620px;width:140%">
+							</div>
+                </div></div></div>
+
+<h2 class="text-center"> Login </h2>
+
+<form method="POST" enctype="multipart/form-data" style="background-color:#2E5A88">
+    {% csrf_token %}
+ <div class="container px-2 mb-5">
+  <div class="mb-3 row">
+    <label class="form-label">login name</label>
+    <input type="text" class="form-control"  name="u" placeholder="Enter login name">
+    </div>
+    <div class="mb-3 row">
+    <label  class="form-label">Password</label>
+    <input type="password" class="form-control" name="p" placeholder="Enter Password">
+    </div>
+     <div class="mb-3 row">
+      <input type="submit" class="form-control" id="submit">
+    </div><br><br>
+</form>
+    </div>
+{% endblock %}

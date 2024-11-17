@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h4>ADD PRODUCTS </h4>
+<form method="POST" enctype="multipart/form-data" style="background-color:#2E5A88">
+
+    {% csrf_token %}
+  <div class="container">
+  <div class="mb-3 row">
+    <label class="form-label">NAME</label>
+    <input type="text" class="form-control"  name="n" placeholder="Enter Name">
+    </div>
+      <div class="mb-3 row">
+    <label  class="form-label">DESCRIPTION</label>
+    <input type="text" class="form-control"  name="d" placeholder="Description">
+    </div>
+      <div class="mb-3 row">
+  <label for="formFile" class="form-label">IMAGE</label>
+  <input class="form-control" type="file" id="formFile" name="i">
+</div>
+       <div class="mb-3 row">
+    <label  class="form-label">STOCK</label>
+    <input type="text" class="form-control"  name="s" placeholder="Stock">
+    </div>
+       <div class="mb-3 row">
+    <label  class="form-label">PRICE</label>
+    <input type="number" class="form-control"  name="p" placeholder="Price">
+    </div>
+    <div class="col">
+        <label class="form-label">Category</label>
+        <select name="c" id="">
+            {% for i in links %}
+            <option value="{{i.name}}">{{i.name}}</option>
+           {% endfor %}
+        </select>
+
+     </div>
+
+
+
+      <div class="mb-3 row">
+      <input type="submit" class="form-control" id="submit">
+    </div></div><br><br>
+</form>
+
+{% endblock %}
